@@ -28,7 +28,7 @@ Route::get('/testing', function () {
 
 
 // Content routes
-Route::get('/cities', [CityController::class, 'index'])->middleware(IsVerified::class);
+Route::get('/cities', [CityController::class, 'index'])->middleware(['auth', IsVerified::class]);
 
 // Dashboard route
 
@@ -52,3 +52,8 @@ Route::get('/contact', function () {
 // Registration Routes
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register'); // Use the imported class
 Route::post('/register', [AuthController::class, 'register']); // Use the imported class
+
+// Newsletter
+Route::post('/newsletter', function () {
+    return "Subscribed successfully";
+});
