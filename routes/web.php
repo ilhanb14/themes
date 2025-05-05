@@ -39,6 +39,7 @@ Route::get('/about', function () {
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/profile/images', [ProfileController::class, 'uploadImages'])->name('profile.images.upload'); 
 
 Route::get('/themedays', function () {
     return view('themedays.index');
