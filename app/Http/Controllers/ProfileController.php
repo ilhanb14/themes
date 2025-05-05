@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Rule; // Needed for unique email check
+use App\Models\Image;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
