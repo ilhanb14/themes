@@ -27,6 +27,29 @@
                     <a href="{{ route('profile.edit') }}" class="btn btn-primary">Edit Profile</a>
                 </div>
             </div>
+
+            {{-- Display Travel Images --}}
+            {{-- Check if the user has any images (using the relationship loaded in the controller) --}}
+            @if($user->images->isNotEmpty()) 
+            <div class="card mt-4"> {{-- Add margin top for spacing --}}
+                <div class="card-header">My Travel Images</div>
+                <div class="card-body">
+                    <div class="row">
+                        {{-- Loop through the user's images --}}
+                        @foreach($user->images as $image) 
+                            <div class="col-md-4 mb-3"> {{-- Bootstrap grid column --}}
+                                {{-- Use asset() helper to generate URL to the public storage --}}
+                                <img src="{{ asset('storage/' . $image->path) }}" 
+                                     alt="User travel image" class="img-fluid img-thumbnail">
+                                {{-- Optional: Add delete button or other actions here --}}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            @endif 
+            {{-- End Display Travel Images --}}
+
         </div>
     </div>
 </div>
