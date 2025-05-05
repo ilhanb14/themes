@@ -52,4 +52,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the images for the user.
+     * Defines a one-to-many relationship.
+     */
+    public function images(): HasMany // Type hint the return type
+    {
+        // Links this User model to the Image model.
+        // Assumes 'user_id' foreign key on the images table.
+        return $this->hasMany(Image::class); 
+    }
 }
