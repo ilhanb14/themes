@@ -57,3 +57,26 @@ Route::post('/register', [AuthController::class, 'register']); // Use the import
 Route::post('/newsletter', function () {
     return "Subscribed successfully";
 });
+
+
+// API Documentation Routes
+Route::get('/api/documentation', function () {
+    return view('vendor.l5-swagger.index', [
+        'documentationTitle' => 'docs',
+        'documentation' => 'default',
+        'urlsToDocs' => [url('/docs/api-docs.json')],
+        'useAbsolutePath' => config('l5-swagger.defaults.paths.use_absolute_path', true),
+        'operationsSorter' => config('l5-swagger.defaults.operations_sort', null),
+        'configUrl' => config('l5-swagger.defaults.additional_config_url', null),
+        'validatorUrl' => config('l5-swagger.defaults.validator_url', null),
+    ]);
+})->name('l5-swagger.default.api');
+
+// Serve API Docs JSON file
+Route::get('/docs/api-docs.json', function () {
+    $filePath = storage_path('api-docs/api-docs.json');
+    if (file_exists($filePath)) {
+        return response()->file($filePath);
+    }
+    return response()->json(['error' => 'API documentation not found'], 404);
+});
