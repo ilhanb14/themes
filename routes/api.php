@@ -23,4 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
     
     // Cities resource routes
     Route::apiResource('cities', CityController::class);
+
+    Route::get('/cities/country/{country}', [CityController::class, 'getByCountry']);
+    Route::get('/cities/continent/{continent}', [CityController::class, 'getByContinent']);
 });

@@ -139,4 +139,82 @@ class CityController extends Controller
     {
         //
     }
+
+    /**
+     * @OA\Get(
+     *     path="/cities/country/{country}",
+     *     summary="Get a list of all cities in a country",
+     *     operationId="getCitiesByCountrysList",
+     *     tags={"Cities"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                 type="object",
+     *                 @OA\Property(property="id", type="integer"),
+     *                 @OA\Property(property="name", type="string"),
+     *                 @OA\Property(property="country", type="string"),
+     *                 @OA\Property(property="continent", type="string"),
+     *                 @OA\Property(property="population", type="integer", nullable=true),
+     *                 @OA\Property(property="latitude", type="number", format="float"),
+     *                 @OA\Property(property="longitude", type="number", format="float"),
+     *                 @OA\Property(property="known_for", type="string", nullable=true),
+     *                 @OA\Property(property="founded_year", type="integer", nullable=true),
+     *                 @OA\Property(property="is_capital", type="boolean"),
+     *                 @OA\Property(property="annual_tourists", type="integer", nullable=true),
+     *                 @OA\Property(property="created_at", type="string", format="date-time"),
+     *                 @OA\Property(property="updated_at", type="string", format="date-time")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=401, description="Unauthenticated")
+     * )
+     */
+    public function getByCountry(string $country) {
+        $cities = City::where('country', $country)->get();
+
+        return response()->json($cities);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/cities/continent/{continent}",
+     *     summary="Get a list of all cities in a continent",
+     *     operationId="getCitiesByContinentsList",
+     *     tags={"Cities"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                 type="object",
+     *                 @OA\Property(property="id", type="integer"),
+     *                 @OA\Property(property="name", type="string"),
+     *                 @OA\Property(property="country", type="string"),
+     *                 @OA\Property(property="continent", type="string"),
+     *                 @OA\Property(property="population", type="integer", nullable=true),
+     *                 @OA\Property(property="latitude", type="number", format="float"),
+     *                 @OA\Property(property="longitude", type="number", format="float"),
+     *                 @OA\Property(property="known_for", type="string", nullable=true),
+     *                 @OA\Property(property="founded_year", type="integer", nullable=true),
+     *                 @OA\Property(property="is_capital", type="boolean"),
+     *                 @OA\Property(property="annual_tourists", type="integer", nullable=true),
+     *                 @OA\Property(property="created_at", type="string", format="date-time"),
+     *                 @OA\Property(property="updated_at", type="string", format="date-time")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=401, description="Unauthenticated")
+     * )
+     */
+    public function getByContinent(string $continent) {
+        $cities = City::where('continent', $continent)->get();
+
+        return response()->json($cities);
+    }
 }
